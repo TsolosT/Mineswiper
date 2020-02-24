@@ -2,25 +2,20 @@
 const cards=document.querySelectorAll(".card");
 const playAgainBtn=document.querySelector("#playAgainBtn");
 const modal=document.querySelector("#modal");
-const modalBtnClose=document.querySelector(".modal-close");
-let fhamster=0;
+const modalBtnClose=document.querySelector("#closeModalBtn");
+let fhamster;
 
-//init
-init();
-modalBtnClose.addEventListener("click",()=>{
+modalBtnClose.addEventListener("click", () => {
     modal.classList.remove('is-open');
     modal.classList.add("modal--offscreen");
 });
+//init
+flipCardOnClick(cards);
+init();
+
 //functions
-//init function
-function init(){
-    flipCardOnClick(cards);
-    setCards(cards);
-}
-//
 function gameOver()
 {   
-    
     playAgainBtn.classList.remove('hide');
     for(let i=0;i<cards.length;i++)
     {
@@ -31,7 +26,7 @@ function gameOver()
         reset();
     });
 }
-//Function Reveals the card,and deactivates it
+//Function Reveals the card,and deactivates it 
 function flipCardOnClick(arrayCards)
 {
     for(let i=0;i<arrayCards.length;i++)
@@ -40,19 +35,7 @@ function flipCardOnClick(arrayCards)
             {
                 arrayCards[i].children[0].lastElementChild.classList.add('flipped');
                 deactivateCard(arrayCards[i]);
-                if(arrayCards[i].children[0].lastElementChild.classList.contains('cat')){
-                    showMessage("Whoops,You lost..");
-                    gameOver();
-                }
-                else{
-                     fhamster++;
-                        if(fhamster==8)
-                        {   
-                            showMessage("Awesome,You Nailed it!!");
-                            gameOver();
-                        }
-                   
-                }
+                gameLogic(arrayCards[i]);
             });
         }
 }
@@ -61,7 +44,7 @@ function deactivateCard(card){
     card.classList.add('card--deactived');
 }
 //Function that set random values(cats & hamsters) to cards
-function setCards(cards){
+ function setCards(cards){
     //generate cat's position random
     let cats_position = [];
     while (cats_position.length < 4) {
@@ -78,9 +61,9 @@ function setCards(cards){
         }
     }
     //now add cats values to cards
-    addValues(cards,cats_position,"cat","assets/imgs/cat_80px.png");
+      addValues(cards,cats_position,"cat","assets/imgs/cat_80px.png");
     //now add mouse values to cards
-    addValues(cards,mouse_position,'hamster',"assets/imgs/hamster_80px.png");
+      addValues(cards,mouse_position,'hamster',"assets/imgs/hamster_80px.png");
 }
 
 function addValues(cards,positions,class_name,img_src)
@@ -94,7 +77,6 @@ function addValues(cards,positions,class_name,img_src)
 //reset game
 function reset()
 {   
-    fhamster=0
     //remove flipped, cat/hamster,card--deactived class
     cards.forEach(card=>{
         card.children[0].lastElementChild.classList.remove("flipped");
@@ -116,6 +98,26 @@ function showMessage(message)
      setInterval(()=>{
             modal.classList.remove('is-open');
             modal.classList.add('modal--offscreen');
-     },3500);
+     },2500);
      
+}
+//init function
+ function init() {
+    fhamster = 0;
+     setCards(cards);
+}
+//function that checks for win or lose condition
+function gameLogic(block)
+{
+    if(block.children[0].lastElementChild.classList.contains('cat'))
+    { 
+        showMessage("Whoops,You lost..");
+        gameOver();
+    }
+    else  if(fhamster===7)
+    {
+        showMessage("Awesome,You Nailed it..");
+        gameOver();
+    }    
+    fhamster++;
 }
