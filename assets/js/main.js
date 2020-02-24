@@ -93,7 +93,8 @@ function addValues(cards,positions,class_name,img_src)
 }
 //reset game
 function reset()
-{
+{   
+    fhamster=0
     //remove flipped, cat/hamster,card--deactived class
     cards.forEach(card=>{
         card.children[0].lastElementChild.classList.remove("flipped");

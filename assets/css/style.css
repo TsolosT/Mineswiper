@@ -103,6 +103,12 @@ img{
   -ms-user-select: none;      /* IE 10+ */
   user-select: none;   
 }
+@media screen and (max-width:600px)
+{
+    img{
+            width: 44px;
+    }
+}
 .hide{
     display:none;
 }
