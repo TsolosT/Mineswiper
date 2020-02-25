@@ -9,10 +9,9 @@ modalBtnClose.addEventListener("click", () => {
     modal.classList.remove('is-open');
     modal.classList.add("modal--offscreen");
 });
-//init
+//main
 flipCardOnClick(cards);
 init();
-
 //functions
 function gameOver()
 {   
@@ -45,6 +44,7 @@ function deactivateCard(card){
 }
 //Function that set random values(cats & hamsters) to cards
  function setCards(cards){
+        preLoadAnimationOn();
     //generate cat's position random
     let cats_position = [];
     while (cats_position.length < 4) {
@@ -61,15 +61,16 @@ function deactivateCard(card){
         }
     }
     //now add cats values to cards
-      addValues(cards,cats_position,"cat","assets/imgs/cat_80px.png");
+      addValues(cards,cats_position,"cat","assets/imgs/cat_80px.png",3);
     //now add mouse values to cards
-      addValues(cards,mouse_position,'hamster',"assets/imgs/hamster_80px.png");
+      addValues(cards,mouse_position,'hamster',"assets/imgs/hamster_80px.png",7);  
+       preLoadAnimationOff();
 }
 
-function addValues(cards,positions,class_name,img_src)
-{  
-    for(let i=0;i<positions.length;i++)
-    {   
+function addValues(cards,positions,class_name,img_src,length)
+{
+     for(let i=0;i<=length;i++)
+    {   console.log("i: " + i + " pos:" + positions[i] + " class : "+class_name);
         cards[positions[i]].children[0].lastElementChild.classList.add(class_name);
         cards[positions[i]].children[0].lastElementChild.children[0].src=img_src;
     }
@@ -120,4 +121,19 @@ function gameLogic(block)
         gameOver();
     }    
     fhamster++;
+}
+function preLoadAnimationOn()
+{
+    document.querySelector("#main").style.display = "none";
+    document.querySelector("#bugMSG").style.display="block";
+    document.getElementById("loader").classList.add("loader");
+    
+}
+function preLoadAnimationOff()
+{
+    setTimeout(()=>{
+            document.getElementById("loader").classList.remove("loader");
+            document.querySelector("#bugMSG").style.display="none";
+            document.querySelector("#main").style.display="flex";          
+        },4500);
 }

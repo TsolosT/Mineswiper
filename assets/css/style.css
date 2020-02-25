@@ -8,8 +8,6 @@
 }
 html,
 body {
-    width: 100%;
-    height: 100%;
     background: #1D976C;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #93F9B9, #1D976C);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #93F9B9, #1D976C); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
@@ -210,4 +208,72 @@ img{
     cursor: pointer;
     font-size:30px;
     padding: 5px;
+}
+/* Loading position & style  & animation */
+.flex--center{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    margin-top:20em;
+}
+.loader {
+    position:relative;
+}
+.loader::before,
+.loader::after{
+    content:"";
+    width:1.8em;
+    height:1.8em;
+    position:absolute;
+    border-radius:4em;
+}
+.loader::before{
+    background:#F44336;
+    left:0;
+    transform:translateX(10px);
+    animation: moveLeft 1s ease infinite;
+}
+.loader::after{
+    background:#2196F3;
+    right:0;
+    transform:translateX(-10px);
+    animation: moveRight 1s ease infinite;
+}
+@keyframes moveRight{
+    0%{
+        transform:translateX(-10px);
+    }
+    50%{
+        transform:translateX(10px);
+    }
+    100%{
+        transform:translateX(-10px);
+    }
+}
+@keyframes moveLeft{
+    0%{
+        transform:translateX(10px);
+    }
+    50%{
+        transform:translateX(-10px);
+    }
+    100%{
+        transform:translateX(10px);
+    }
+}
+/* alert */
+.bug-alert{
+    font-family:arial;
+    position: absolute;
+    top:0;
+    left:40%;
+    padding: .75rem 1.25rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+} 
+.bug-alert--dark{
+    color: #1b1e21;
+    background-color: #d6d8d9;
+    border-color: #c6c8ca;
 }

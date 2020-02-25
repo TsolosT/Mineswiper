@@ -3,15 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Block Swiper Mini Game</title>
-    <!--  CSS/Fonts Vendors  -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
+    <link rel="shortcut icon" href="assets/imgs/hamster_24px.png" type="image/png">
+    <title>HamSwiper Mini Game</title>
     <!-- Custom CSS -->
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
-
-    <section class="container--flex" >
+    <div id="bugMSG" class="bug-alert bug-alert--dark" role="alert">
+        If loading takes more than 5sec,reload page...
+    </div>
+    <section id="main" class="container--flex" >
         <header>
             <h1>Block Swiper Mini Game </h1>
             <p>Find all hamsters (total 8) and avoiding  the cats . </p> 
@@ -138,9 +139,6 @@
                     </div>
                 </div>
             </div>
-        
-    
-
         </section>
     </section>
     <!-- Modal--Message -->
@@ -148,6 +146,19 @@
         <div id="closeModalBtn" class="modal-close">+</div>
         <h2 id="msg"></h2>
     </div>
+    <!-- Preloader Animation -->
+    <div class="flex--center">
+            <div id="loader"></div>
+    </div>
+    <!--  -->
+    <!-- <script>
+          document.querySelector("#main").style.display="none";
+        document.getElementById("loader").classList.add("loader");
+        setTimeout(()=>{
+            document.getElementById("loader").classList.remove("loader");
+            document.querySelector("#main").style.display="flex";
+        },4500);
+    </script> -->
     <!-- Game Script Logic -->
     <script src="assets/js/main.js"></script>
 </body>
