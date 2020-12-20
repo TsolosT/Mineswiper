@@ -112,6 +112,8 @@ function reset()
         card.children[0].lastElementChild.classList.remove("hamster");
         card.classList.remove("card--deactived");
     });
+    //hide play again btn
+    playAgainBtn.classList.add('hide');
     //reassign values
     init();
 }
